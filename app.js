@@ -5,11 +5,20 @@ import {
     callCompletionAPI,
     callChatAPI
 } from './lib/openai.js';
+import { html } from './resources/html.js'
 
 const app = express();
 
 // Middleware 
 app.use(express.json());
+
+app.get(
+    '/html-test',
+    // Return a whole HTML page with internal CSS styles 
+    (req, res) => {
+        res.send(html);
+    }
+)
 
 app.get(
     '/list-models',
