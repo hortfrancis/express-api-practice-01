@@ -1,13 +1,30 @@
 import express from 'express';
-import { listModels, callCompletionAPI, callChatAPI } from './lib/openai.js';
+import {
+    listModels,
+    promptChatAPI,
+    callCompletionAPI,
+    callChatAPI
+} from './lib/openai.js';
 
 const app = express();
+
+// Middleware 
+app.use(express.json());
 
 app.get(
     '/list-models',
     // Display a list of available models from the OpenAI API
     async (req, res) => {
         res.send(await listModels());
+    }
+)
+
+app.post(
+    '/chat-input',
+    // Chat response to user prompt input
+    async (req, res) => {
+        const data = req.body;
+        res.send(await promptChatAPI(data.message));
     }
 )
 
