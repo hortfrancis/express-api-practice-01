@@ -5,7 +5,8 @@ import {
     callCompletionAPI,
     callChatAPI
 } from './lib/openai.js';
-import { html } from './resources/html.js'
+import { html } from './resources/html.js';
+import { generateLemonPoem } from './lib/lemonPoem.js';
 
 const app = express();
 
@@ -19,6 +20,14 @@ app.get(
         res.send(html);
     }
 )
+
+app.get(
+    '/lemon-poem',
+    // Display a poem about lemons, formatted pleasingly.
+    async (req, res) => {
+        res.send(await generateLemonPoem());
+    }
+);
 
 app.get(
     '/list-models',
