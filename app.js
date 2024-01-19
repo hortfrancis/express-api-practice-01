@@ -14,6 +14,13 @@ const app = express();
 app.use(express.json());
 
 app.get(
+    '/',
+    (req, res) => {
+        res.send("Express API experiments!");
+    }
+)
+
+app.get(
     '/html-test',
     // Return a whole HTML page with internal CSS styles 
     (req, res) => {
